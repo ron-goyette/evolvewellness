@@ -23,9 +23,9 @@ const BeforeDashboard: React.FC = () => {
           {' to see the results.'}
         </li>
         <li>
-          If you created this repo using Payload Cloud, head over to GitHub and clone it to your
-          local machine. It will be under the <i>GitHub Scope</i> that you selected when creating
-          this project.
+          If you are seeing this in production your workflow is correct. If you created this repo
+          using Payload Cloud, head over to GitHub and clone it to your local machine. It will be
+          under the <i>GitHub Scope</i> that you selected when creating this project.
         </li>
         <li>
           {'Modify your '}
