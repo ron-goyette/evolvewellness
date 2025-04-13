@@ -1,5 +1,4 @@
-//import banner from payloadcms/ui/elements/Banner
-{ Banner } from '@payloadcms/ui/elements/Banner'
+import { Banner } from '@payloadcms/ui/elements/Banner'
 import React from 'react'
 
 import { SeedButton } from './SeedButton'
