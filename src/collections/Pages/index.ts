@@ -5,13 +5,16 @@ import { authenticatedOrPublished } from '../../access/authenticatedOrPublished'
 import { Archive } from '../../blocks/ArchiveBlock/config'
 import { CallToAction } from '../../blocks/CallToAction/config'
 import { Content } from '../../blocks/Content/config'
-import { FormBlock } from '../../blocks/Form/config'
 import { MediaBlock } from '../../blocks/MediaBlock/config'
 import { hero } from '@/heros/config'
 import { slugField } from '@/fields/slug'
 import { populatePublishedAt } from '../../hooks/populatePublishedAt'
 import { generatePreviewPath } from '../../utilities/generatePreviewPath'
 import { revalidateDelete, revalidatePage } from './hooks/revalidatePage'
+import AboutMini from '../../blocks/AboutMini/config'
+import Services from '../../blocks/Services/config'
+import AboutMain from '../../blocks/AboutMain/config'
+import { VideoBlock } from '../../blocks/VideoBlock/config'
 
 import {
   MetaDescriptionField,
@@ -75,7 +78,16 @@ export const Pages: CollectionConfig<'pages'> = {
             {
               name: 'layout',
               type: 'blocks',
-              blocks: [CallToAction, Content, MediaBlock, Archive, FormBlock],
+              blocks: [
+                CallToAction,
+                Content,
+                MediaBlock,
+                Archive,
+                AboutMini,
+                Services,
+                AboutMain,
+                VideoBlock,
+              ],
               required: true,
               admin: {
                 initCollapsed: true,

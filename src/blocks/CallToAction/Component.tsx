@@ -1,21 +1,33 @@
+'use client'
 import React from 'react'
+import type { Page } from '@/payload-types'
 
-import type { CallToActionBlock as CTABlockProps } from '@/payload-types'
-
+type CallToActionProps = Extract<Page['layout'][number], { blockType: 'cta' }>
 import RichText from '@/components/RichText'
 import { CMSLink } from '@/components/Link'
+import { ContactButton } from '@/components/ContactButton'
 
-export const CallToActionBlock: React.FC<CTABlockProps> = ({ links, richText }) => {
+export const CallToAction: React.FC<CallToActionProps> = ({ links, richText, buttons }) => {
+  const contact = buttons?.contact || {}
   return (
-    <div className="container">
-      <div className="bg-card rounded border-border border p-4 flex flex-col gap-8 md:flex-row md:justify-between md:items-center">
-        <div className="max-w-[48rem] flex items-center">
-          {richText && <RichText className="mb-0" data={richText} enableGutter={false} />}
-        </div>
-        <div className="flex flex-col gap-8">
-          {(links || []).map(({ link }, i) => {
-            return <CMSLink key={i} size="lg" {...link} />
-          })}
+    <div className="bg-muted w-full flex items-center justify-center m-0">
+      <div className="flex flex-col items-center py-16 gap-6 text-center">
+        {richText && (
+          <RichText
+            className="text-3xl font-bold text-white m-0 max-w-2xl"
+            data={richText}
+            enableGutter={false}
+          />
+        )}
+        <div className="flex justify-center gap-4">
+          {(links || []).map(({ link }, i) => (
+            <CMSLink key={i} size="lg" {...link} />
+          ))}
+          {contact?.show && (
+            <ContactButton variant={contact.variant || 'primary'} size={contact.size || 'default'}>
+              {contact.label || 'Contact'}
+            </ContactButton>
+          )}
         </div>
       </div>
     </div>

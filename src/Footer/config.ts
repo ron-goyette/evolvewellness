@@ -10,6 +10,24 @@ export const Footer: GlobalConfig = {
   },
   fields: [
     {
+      name: 'tagline',
+      type: 'text',
+      required: false,
+      label: 'Tagline',
+      admin: {
+        description: 'The main tagline displayed in the footer.',
+      },
+    },
+    {
+      name: 'copyright',
+      type: 'text',
+      required: false,
+      label: 'Copyright',
+      admin: {
+        description: 'Copyright text for the footer.',
+      },
+    },
+    {
       name: 'navItems',
       type: 'array',
       fields: [
@@ -24,6 +42,37 @@ export const Footer: GlobalConfig = {
           RowLabel: '@/Footer/RowLabel#RowLabel',
         },
       },
+    },
+    {
+      name: 'socialLinks',
+      type: 'array',
+      label: 'Social Media Links',
+      maxRows: 8,
+      admin: {
+        description: 'Add up to 8 social media profile links with icons.',
+        initCollapsed: true,
+      },
+      fields: [
+        {
+          name: 'platform',
+          type: 'text',
+          label: 'Platform Name',
+          required: true,
+        },
+        {
+          name: 'url',
+          type: 'text',
+          label: 'Profile URL',
+          required: true,
+        },
+        {
+          name: 'icon',
+          type: 'upload',
+          relationTo: 'media',
+          label: 'Platform Icon',
+          required: true,
+        },
+      ],
     },
   ],
   hooks: {

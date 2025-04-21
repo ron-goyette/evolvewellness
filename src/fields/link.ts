@@ -2,7 +2,16 @@ import type { Field, GroupField } from 'payload'
 
 import deepMerge from '@/utilities/deepMerge'
 
-export type LinkAppearances = 'default' | 'outline'
+export type LinkAppearances =
+  | 'default'
+  | 'outline'
+  | 'secondary'
+  | 'ghost'
+  | 'link'
+  | 'destructive'
+  | 'primary'
+  | 'danger'
+  | 'secondaryCustom'
 
 export const appearanceOptions: Record<LinkAppearances, { label: string; value: string }> = {
   default: {
@@ -12,6 +21,34 @@ export const appearanceOptions: Record<LinkAppearances, { label: string; value: 
   outline: {
     label: 'Outline',
     value: 'outline',
+  },
+  secondary: {
+    label: 'Secondary',
+    value: 'secondary',
+  },
+  ghost: {
+    label: 'Ghost',
+    value: 'ghost',
+  },
+  link: {
+    label: 'Link',
+    value: 'link',
+  },
+  destructive: {
+    label: 'Destructive',
+    value: 'destructive',
+  },
+  primary: {
+    label: 'Primary',
+    value: 'primary',
+  },
+  danger: {
+    label: 'Danger',
+    value: 'danger',
+  },
+  secondaryCustom: {
+    label: 'Secondary Custom',
+    value: 'secondaryCustom',
   },
 }
 
@@ -118,7 +155,17 @@ export const link: LinkType = ({ appearances, disableLabel = false, overrides = 
   }
 
   if (appearances !== false) {
-    let appearanceOptionsToUse = [appearanceOptions.default, appearanceOptions.outline]
+    let appearanceOptionsToUse = [
+      appearanceOptions.default,
+      appearanceOptions.outline,
+      appearanceOptions.secondary,
+      appearanceOptions.ghost,
+      appearanceOptions.link,
+      appearanceOptions.destructive,
+      appearanceOptions.primary,
+      appearanceOptions.danger,
+      appearanceOptions.secondaryCustom,
+    ]
 
     if (appearances) {
       appearanceOptionsToUse = appearances.map((appearance) => appearanceOptions[appearance])

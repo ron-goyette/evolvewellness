@@ -9,10 +9,19 @@ import { CollectionArchive } from '@/components/CollectionArchive'
 
 export const ArchiveBlock: React.FC<
   ArchiveBlockProps & {
-    id?: string
+    id?: string | null
+    excludeId?: string | number | null
   }
 > = async (props) => {
-  const { id, categories, introContent, limit: limitFromProps, populateBy, selectedDocs } = props
+  const {
+    id,
+    categories,
+    introContent,
+    limit: limitFromProps,
+    populateBy,
+    selectedDocs,
+    excludeId,
+  } = props
 
   const limit = limitFromProps || 3
 
@@ -26,34 +35,55 @@ export const ArchiveBlock: React.FC<
       else return category
     })
 
+    const whereQuery = {
+      ...(flattenedCategories && flattenedCategories.length > 0
+        ? {
+            categories: {
+              in: flattenedCategories,
+            },
+          }
+        : {}),
+      ...(excludeId
+        ? {
+            id: {
+              not_equals: excludeId,
+            },
+          }
+        : {}),
+    }
+
     const fetchedPosts = await payload.find({
       collection: 'posts',
       depth: 1,
       limit,
-      ...(flattenedCategories && flattenedCategories.length > 0
-        ? {
-            where: {
-              categories: {
-                in: flattenedCategories,
-              },
-            },
-          }
-        : {}),
+      where: whereQuery,
     })
 
     posts = fetchedPosts.docs
-  } else {
-    if (selectedDocs?.length) {
-      const filteredSelectedPosts = selectedDocs.map((post) => {
-        if (typeof post.value === 'object') return post.value
-      }) as Post[]
+  } else if (selectedDocs?.length) {
+    const payload = await getPayload({ config: configPromise })
 
-      posts = filteredSelectedPosts
-    }
+    // Get IDs of posts that need to be fetched
+    const postIds = selectedDocs
+      .map((doc) => (typeof doc.value === 'object' ? doc.value.id : doc.value))
+      .filter((id) => id !== excludeId)
+
+    // Fetch all selected posts with full data
+    const fetchedPosts = await payload.find({
+      collection: 'posts',
+      depth: 1,
+      where: {
+        id: {
+          in: postIds,
+        },
+      },
+    })
+
+    posts = fetchedPosts.docs
   }
 
   return (
-    <div className="my-16" id={`block-${id}`}>
+    <div className="py-16" id={`block-${id}`}>
       {introContent && (
         <div className="container mb-16">
           <RichText className="ms-0 max-w-[48rem]" data={introContent} enableGutter={false} />
