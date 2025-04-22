@@ -7,8 +7,24 @@ import type { Header as HeaderType } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { ScheduleAppointmentButton } from '@/components/ScheduleAppointmentButton'
 
-export const HeaderNav: React.FC<{ data: HeaderType }> = ({ data }) => {
+export const HeaderNav: React.FC<{
+  data: HeaderType
+  mobile?: boolean
+  onNavigate?: () => void
+}> = ({ data, mobile = false, onNavigate }) => {
   const navItems = data?.navItems || []
+
+  if (mobile) {
+    return (
+      <nav className="flex flex-col items-center gap-8 mt-8">
+        {navItems.map(({ link }, i) => (
+          <span key={i} onClick={onNavigate} className="w-full flex justify-center">
+            <CMSLink {...link} appearance="link" className="text-2xl text-forground" />
+          </span>
+        ))}
+      </nav>
+    )
+  }
 
   return (
     <nav className="flex gap-6 items-center">
