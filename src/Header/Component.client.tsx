@@ -37,9 +37,13 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
 
   return (
     <header className="container relative z-20" {...(theme ? { 'data-theme': theme } : {})}>
-      <div className="py-6 flex justify-between items-center">
+      <div className="py-4 sm:py-6 flex justify-between items-center min-h-[56px]">
         <Link href="/">
-          <Logo loading="eager" priority="high" />
+          <Logo
+            loading="eager"
+            priority="high"
+            className="w-20 h-8 md:w-32 md:h-12 max-h-[40px] sm:max-h-[48px]"
+          />
         </Link>
         {/* Desktop Nav */}
         <div className="hidden md:flex items-center gap-2">
@@ -48,11 +52,11 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         </div>
         {/* Hamburger for mobile */}
         <button
-          className="md:hidden p-2 rounded focus:outline-none focus:ring-2 focus:ring-ring"
+          className="md:hidden p-3 rounded focus:outline-none focus:ring-2 focus:ring-ring"
           aria-label="Open menu"
           onClick={openMenu}
         >
-          <Menu className="w-7 h-7" />
+          <Menu className="w-10 h-10" />
         </button>
       </div>
       {/* Mobile Menu Overlay */}
