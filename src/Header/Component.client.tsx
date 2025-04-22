@@ -36,9 +36,9 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
         <Link href="/">
           <Logo loading="eager" priority="high" />
         </Link>
-        <div className="flex items-center gap-4">
-          <HeaderNav data={data} />
+        <div className="flex items-center gap-2">
           <ThemeSelector />
+          <HeaderNav data={data} />
         </div>
       </div>
     </header>
