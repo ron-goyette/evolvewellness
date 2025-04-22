@@ -31,7 +31,7 @@ export const HeaderNav: React.FC<{
       {navItems.map(({ link }, i) => {
         return <CMSLink key={i} {...link} appearance="link" className="text-forground" />
       })}
-      <div className="ml-4 flex gap-3">
+      <div className="ml-4 flex gap-2">
         <ScheduleAppointmentButton variant="primary" size="sm" />
       </div>
     </nav>
