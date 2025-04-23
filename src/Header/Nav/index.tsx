@@ -1,6 +1,7 @@
 'use client'
 
 import React from 'react'
+import { ChevronDown } from 'lucide-react'
 
 import type { Header as HeaderType } from '@/payload-types'
 
