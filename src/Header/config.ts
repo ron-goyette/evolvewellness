@@ -16,6 +16,37 @@ export const Header: GlobalConfig = {
         link({
           appearances: false,
         }),
+        {
+          name: 'children',
+          type: 'array',
+          fields: [
+            link({
+              appearances: false,
+            }),
+            {
+              name: 'children',
+              type: 'array',
+              fields: [
+                link({
+                  appearances: false,
+                }),
+                // You can go deeper if you want, but 2 levels is usually enough
+              ],
+              admin: {
+                initCollapsed: true,
+                components: {
+                  RowLabel: '@/Header/RowLabel#RowLabel',
+                },
+              },
+            },
+          ],
+          admin: {
+            initCollapsed: true,
+            components: {
+              RowLabel: '@/Header/RowLabel#RowLabel',
+            },
+          },
+        },
       ],
       maxRows: 6,
       admin: {
