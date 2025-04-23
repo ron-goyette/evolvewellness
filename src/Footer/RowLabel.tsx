@@ -2,21 +2,15 @@
 import { Header } from '@/payload-types'
 import { RowLabelProps, useRowLabel } from '@payloadcms/ui'
 
-function getLabelPath(data: any): string {
-  let label = data?.data?.link?.label || ''
-  let parent = data?.parent
-  while (parent) {
-    const parentLabel = parent?.data?.link?.label
-    if (parentLabel) {
-      label = parentLabel + ' > ' + label
-    }
-    parent = parent.parent
-  }
-  return label
-}
-
 export const RowLabel: React.FC<RowLabelProps> = () => {
   const data = useRowLabel<any>()
-  const labelPath = getLabelPath(data)
-  return <div>{labelPath ? `Nav: ${labelPath}` : 'Nav item'}</div>
+  const label = data?.data?.link?.label || 'Row'
+  const pathArray = Array.isArray(data?.path) ? data.path : []
+  const level = pathArray.filter((p: string) => p === 'children').length || 0
+  const prefix = level === 0 ? 'Top-level' : `Level ${level}`
+  return (
+    <div>
+      {prefix} Nav item{data.rowNumber !== undefined ? ` ${data.rowNumber + 1}` : ''}: {label}
+    </div>
+  )
 }
