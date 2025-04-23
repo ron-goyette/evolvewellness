@@ -41,22 +41,7 @@ export const Footer: GlobalConfig = {
             link({
               appearances: false,
             }),
-            {
-              name: 'children',
-              type: 'array',
-              fields: [
-                link({
-                  appearances: false,
-                }),
-                // You can go deeper if you want, but 2 levels is usually enough
-              ],
-              admin: {
-                initCollapsed: true,
-                components: {
-                  RowLabel: '@/Footer/RowLabel#RowLabel',
-                },
-              },
-            },
+            // Only one level of children allowed
           ],
           admin: {
             initCollapsed: true,

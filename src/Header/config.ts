@@ -23,22 +23,7 @@ export const Header: GlobalConfig = {
             link({
               appearances: false,
             }),
-            {
-              name: 'children',
-              type: 'array',
-              fields: [
-                link({
-                  appearances: false,
-                }),
-                // You can go deeper if you want, but 2 levels is usually enough
-              ],
-              admin: {
-                initCollapsed: true,
-                components: {
-                  RowLabel: '@/Header/RowLabel#RowLabel',
-                },
-              },
-            },
+            // Only one level of children allowed
           ],
           admin: {
             initCollapsed: true,
