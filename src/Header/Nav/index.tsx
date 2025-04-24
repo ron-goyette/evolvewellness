@@ -7,55 +7,27 @@ import type { Header as HeaderType } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import { ScheduleAppointmentButton } from '@/components/ScheduleAppointmentButton'
 
-type NavItem = NonNullable<HeaderType['navItems']>[number]
+export const HeaderNav: React.FC<{ data: HeaderType; mobile?: boolean }> = ({
+  data,
+  mobile = false,
+}) => {
+  const navItems = data?.navItems || []
 
-const renderNavItems = (items: NavItem[], mobile: boolean, onNavigate?: () => void) => {
-  return items.map((item, i) => {
-    const hasChildren = Array.isArray(item.children) && item.children.length > 0
-    return (
-      <div key={item.id || i} className={hasChildren ? 'relative group' : ''}>
+  return (
+    <nav className={mobile ? 'flex flex-col items-center gap-8 mt-8' : 'flex gap-6 items-center'}>
+      {navItems.map(({ link, id }, i) => (
         <CMSLink
-          {...item.link}
+          key={id || i}
+          {...link}
           appearance="link"
           className={mobile ? 'text-2xl text-forground' : 'text-forground'}
         />
-        {hasChildren && (
-          <div
-            className={
-              mobile
-                ? 'pl-4 border-l mt-2'
-                : 'absolute left-0 top-full mt-2 hidden group-hover:block bg-background shadow-lg rounded'
-            }
-          >
-            {renderNavItems(item.children as NavItem[], mobile, onNavigate)}
-          </div>
-        )}
-      </div>
-    )
-  })
-}
-
-export const HeaderNav: React.FC<{
-  data: HeaderType
-  mobile?: boolean
-  onNavigate?: () => void
-}> = ({ data, mobile = false, onNavigate }) => {
-  const navItems = data?.navItems || []
-
-  if (mobile) {
-    return (
-      <nav className="flex flex-col items-center gap-8 mt-8">
-        {renderNavItems(navItems, true, onNavigate)}
-      </nav>
-    )
-  }
-
-  return (
-    <nav className="flex gap-6 items-center">
-      {renderNavItems(navItems, false, onNavigate)}
-      <div className="ml-4 flex gap-2">
-        <ScheduleAppointmentButton variant="primary" size="sm" />
-      </div>
+      ))}
+      {!mobile && (
+        <div className="ml-4 flex gap-2">
+          <ScheduleAppointmentButton variant="primary" size="sm" />
+        </div>
+      )}
     </nav>
   )
 }
