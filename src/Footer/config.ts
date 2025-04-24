@@ -34,6 +34,22 @@ export const Footer: GlobalConfig = {
         link({
           appearances: false,
         }),
+        {
+          name: 'children',
+          type: 'array',
+          fields: [
+            link({
+              appearances: false,
+            }),
+            // Only one level of children allowed
+          ],
+          admin: {
+            initCollapsed: true,
+            components: {
+              RowLabel: '@/Footer/RowLabel#RowLabel',
+            },
+          },
+        },
       ],
       maxRows: 6,
       admin: {

@@ -10,11 +10,34 @@ import type { Footer } from '@/payload-types'
 import { Logo } from '@/components/Logo/Logo'
 // import { ContactButton } from '@/components/ContactButton'
 import { HiddenContactWidget } from '@/components/HiddenContactWidget'
+import { CMSLink } from '@/components/Link'
 
 type SocialLink = {
   platform: string
   url: string
   icon: { url: string }
+}
+
+type FooterNavItem = NonNullable<Footer['navItems']>[number]
+
+const renderFooterNavItems = (items: FooterNavItem[]) => {
+  return (
+    <ul className="flex flex-col md:flex-row gap-2 md:gap-6">
+      {items.map((item, i: number) => {
+        const hasChildren = Array.isArray(item.children) && item.children.length > 0
+        return (
+          <li key={item.id || i} className="relative group">
+            <CMSLink {...item.link} appearance="link" className="text-forground" />
+            {hasChildren && (
+              <div className="pl-4 mt-2 border-l">
+                {renderFooterNavItems(item.children as FooterNavItem[])}
+              </div>
+            )}
+          </li>
+        )
+      })}
+    </ul>
+  )
 }
 
 export async function Footer() {
@@ -38,6 +61,10 @@ export async function Footer() {
             )}
           </div>
           <div className="flex flex-row items-center gap-2 flex-shrink-0 flex-grow-0 ml-auto">
+            {/* Render nav items if present */}
+            {Array.isArray(footerData.navItems) && footerData.navItems.length > 0 && (
+              <nav className="mr-6">{renderFooterNavItems(footerData.navItems)}</nav>
+            )}
             <span className="font-semibold text-muted-foreground whitespace-nowrap mr-2">
               Find Me On:
             </span>
