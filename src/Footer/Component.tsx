@@ -20,26 +20,6 @@ type SocialLink = {
 
 type FooterNavItem = NonNullable<Footer['navItems']>[number]
 
-const renderFooterNavItems = (items: FooterNavItem[]) => {
-  return (
-    <ul className="flex flex-col md:flex-row gap-2 md:gap-6">
-      {items.map((item, i: number) => {
-        const hasChildren = Array.isArray(item.children) && item.children.length > 0
-        return (
-          <li key={item.id || i} className="relative group">
-            <CMSLink {...item.link} appearance="link" className="text-forground" />
-            {hasChildren && (
-              <div className="pl-4 mt-2 border-l">
-                {renderFooterNavItems(item.children as FooterNavItem[])}
-              </div>
-            )}
-          </li>
-        )
-      })}
-    </ul>
-  )
-}
-
 export async function Footer() {
   const footerData = (await getCachedGlobal('footer', 1)()) as Footer
   const currentYear = new Date().getFullYear()

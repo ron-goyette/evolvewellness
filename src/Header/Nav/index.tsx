@@ -6,7 +6,15 @@ import type { Header as HeaderType } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
 
-const NavItem = ({ link, id, children, mobile }: any) => {
+type NavItemType = NonNullable<HeaderType['navItems']>[number]
+type NavChildType = NonNullable<NavItemType['children']>[number]
+
+const NavItem: React.FC<{
+  link: NavItemType['link']
+  id?: string | null
+  children?: NavItemType['children']
+  mobile: boolean
+}> = ({ link, id, children, mobile }) => {
   const hasChildren = Array.isArray(children) && children.length > 0
   const [open, setOpen] = useState(mobile)
   let closeTimer: NodeJS.Timeout | null = null
@@ -59,7 +67,7 @@ const NavItem = ({ link, id, children, mobile }: any) => {
           }
           style={{ transition: 'opacity 0.15s', opacity: open ? 1 : 0 }}
         >
-          {children?.map((child: any, j: number) => (
+          {children?.map((child, j) => (
             <li key={child.id || j} className={mobile ? '' : undefined}>
               <CMSLink
                 {...child.link}
