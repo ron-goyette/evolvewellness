@@ -48,29 +48,14 @@ export async function Footer() {
     <>
       <footer className="mt-auto bg-muted/50 text-muted-foreground">
         <div className="container py-8 flex flex-col md:flex-row md:items-center md:justify-between">
-          {/* Left: Logo + Tagline */}
-          <div className="flex flex-col items-start flex-shrink-0 flex-grow-0 md:w-auto w-full mb-4 md:mb-0">
-            <Link className="flex items-center" href="/">
-              <span className="brightness-125 saturate-50 block">
-                <Logo className="h-10 md:max-w-[9.375rem] md:w-full md:h-auto w-auto" />
-              </span>
-            </Link>
-            {footerData.tagline && (
-              <span className="text-sm md:text-lg font-medium text-muted-foreground text-left w-full md:w-auto mt-2 md:mt-2">
-                {footerData.tagline}
-              </span>
-            )}
-          </div>
-          {/* Spacer for center (empty) */}
-          <div className="hidden md:block flex-1" />
-          {/* Right: Social */}
-          <div className="flex flex-col md:flex-row items-start md:items-center justify-end gap-2 md:gap-2 w-full md:w-auto">
+          {/* Mobile: Find Me On + Social (above logo/tagline, right-aligned) */}
+          <div className="flex flex-row items-center justify-end gap-2 w-full mb-4 md:hidden">
             <span className="font-semibold text-muted-foreground whitespace-nowrap mr-2">
               Find Me On:
             </span>
             {Array.isArray((footerData as { socialLinks?: SocialLink[] }).socialLinks) &&
               (footerData as { socialLinks?: SocialLink[] }).socialLinks!.length > 0 && (
-                <div className="flex flex-row items-center gap-2 mt-1 md:mt-0">
+                <div className="flex flex-row items-center gap-2">
                   {(footerData as { socialLinks: SocialLink[] }).socialLinks.map((social, idx) => (
                     <a
                       key={idx}
@@ -84,13 +69,63 @@ export async function Footer() {
                         <Image
                           src={social.icon.url}
                           alt={social.platform}
-                          height={24}
-                          width={24}
-                          className="h-6 w-auto object-contain footer-social-muted"
+                          height={30}
+                          width={30}
+                          className="h-6 md:h-[30px] w-auto object-contain footer-social-muted"
                           unoptimized
                           priority
-                          sizes="24px"
-                          style={{ maxHeight: 24, width: 'auto' }}
+                          sizes="(max-width: 767px) 24px, 30px"
+                          style={{ maxHeight: 30, width: 'auto' }}
+                        />
+                      )}
+                    </a>
+                  ))}
+                </div>
+              )}
+          </div>
+          {/* Left: Logo + Tagline */}
+          <div className="flex flex-col items-start flex-shrink-0 flex-grow-0 md:w-auto w-full mb-4 md:mb-0">
+            <Link className="flex items-center" href="/">
+              <span className="brightness-125 saturate-50 block">
+                <Logo className="h-[80px] max-w-[200px] w-auto md:h-10 md:max-w-[9.375rem] md:w-full md:h-auto" />
+              </span>
+            </Link>
+            {footerData.tagline && (
+              <span className="text-xs md:text-lg font-medium text-muted-foreground text-left w-full md:w-auto mt-2 md:mt-2">
+                {footerData.tagline}
+              </span>
+            )}
+          </div>
+          {/* Spacer for center (empty) */}
+          <div className="hidden md:block flex-1" />
+          {/* Right: Social (desktop only) */}
+          <div className="hidden md:flex flex-row items-center justify-end gap-2 w-full md:w-auto">
+            <span className="font-semibold text-muted-foreground whitespace-nowrap mr-2">
+              Find Me On:
+            </span>
+            {Array.isArray((footerData as { socialLinks?: SocialLink[] }).socialLinks) &&
+              (footerData as { socialLinks?: SocialLink[] }).socialLinks!.length > 0 && (
+                <div className="flex flex-row items-center gap-2">
+                  {(footerData as { socialLinks: SocialLink[] }).socialLinks.map((social, idx) => (
+                    <a
+                      key={idx}
+                      href={social.url}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      title={social.platform}
+                      className="inline-block"
+                    >
+                      {social.icon && typeof social.icon === 'object' && social.icon.url && (
+                        <Image
+                          src={social.icon.url}
+                          alt={social.platform}
+                          height={30}
+                          width={30}
+                          className="h-6 md:h-[30px] w-auto object-contain footer-social-muted"
+                          unoptimized
+                          priority
+                          sizes="(max-width: 767px) 24px, 30px"
+                          style={{ maxHeight: 30, width: 'auto' }}
                         />
                       )}
                     </a>
