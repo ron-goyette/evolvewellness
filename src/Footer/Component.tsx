@@ -91,7 +91,7 @@ export async function Footer() {
               </span>
             </Link>
             {footerData.tagline && (
-              <span className="text-xs md:text-lg font-medium text-muted-foreground text-left w-full md:w-auto mt-2 md:mt-2">
+              <span className="text-sm md:text-lg font-medium text-muted-foreground text-left w-full md:w-auto mt-2 md:mt-2">
                 {footerData.tagline}
               </span>
             )}
