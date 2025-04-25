@@ -10,7 +10,6 @@ import type { Header } from '@/payload-types'
 import { Logo } from '@/components/Logo/Logo'
 import { HeaderNav } from './Nav'
 import { ThemeSelector } from '@/providers/Theme/ThemeSelector'
-import { ScheduleAppointmentButton } from '@/components/ScheduleAppointmentButton'
 
 interface HeaderClientProps {
   data: Header
@@ -67,7 +66,6 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           </button>
           <HeaderNav data={data} mobile />
           <div className="mt-8 flex flex-col items-center gap-6">
-            <ScheduleAppointmentButton variant="primary" size="lg" />
             <ThemeSelector />
           </div>
         </div>

@@ -14,7 +14,17 @@ export const Header: GlobalConfig = {
       type: 'array',
       fields: [
         link({
-          appearances: false,
+          appearances: [
+            'default',
+            'outline',
+            'secondary',
+            'ghost',
+            'link',
+            'destructive',
+            'primary',
+            'danger',
+            'secondaryCustom',
+          ],
         }),
       ],
       maxRows: 6,

@@ -5,7 +5,6 @@ import React from 'react'
 import type { Header as HeaderType } from '@/payload-types'
 
 import { CMSLink } from '@/components/Link'
-import { ScheduleAppointmentButton } from '@/components/ScheduleAppointmentButton'
 
 export const HeaderNav: React.FC<{ data: HeaderType; mobile?: boolean }> = ({
   data,
@@ -19,13 +18,13 @@ export const HeaderNav: React.FC<{ data: HeaderType; mobile?: boolean }> = ({
         <CMSLink
           key={id || i}
           {...link}
-          appearance="link"
+          appearance={link.appearance || 'link'}
           className={mobile ? 'text-2xl text-forground' : 'text-forground'}
         />
       ))}
       {!mobile && (
         <div className="ml-4 flex gap-2">
-          <ScheduleAppointmentButton variant="primary" size="sm" />
+          {/* Removed: <ScheduleAppointmentButton variant="primary" size="sm" /> */}
         </div>
       )}
     </nav>

@@ -6,7 +6,6 @@ import type { Page } from '@/payload-types'
 import { CMSLink } from '@/components/Link'
 import RichText from '@/components/RichText'
 import { ContactButton } from '@/components/ContactButton'
-import { ScheduleAppointmentButton } from '@/components/ScheduleAppointmentButton'
 
 type ButtonConfig = {
   show?: boolean | null
@@ -49,14 +48,7 @@ export const LowImpactHero: React.FC<Page['hero']> = ({ links, richText, buttons
                   {contact.label || 'Contact'}
                 </ContactButton>
               )}
-              {schedule?.show && (
-                <ScheduleAppointmentButton
-                  variant={schedule.variant || 'primary'}
-                  size={schedule.size || 'default'}
-                >
-                  {schedule.label || 'Schedule Appointment'}
-                </ScheduleAppointmentButton>
-              )}
+              {/* ScheduleAppointmentButton removed */}
             </div>
           )}
         </div>
