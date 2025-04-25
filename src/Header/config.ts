@@ -26,8 +26,33 @@ export const Header: GlobalConfig = {
             'secondaryCustom',
           ],
         }),
+        {
+          name: 'children',
+          type: 'array',
+          fields: [
+            link({
+              appearances: [
+                'default',
+                'outline',
+                'secondary',
+                'ghost',
+                'link',
+                'destructive',
+                'primary',
+                'danger',
+                'secondaryCustom',
+              ],
+            }),
+          ],
+          admin: {
+            initCollapsed: true,
+            components: {
+              RowLabel: '@/Header/RowLabel#RowLabel',
+            },
+          },
+        },
       ],
-      maxRows: 6,
+      maxRows: 8,
       admin: {
         initCollapsed: true,
         components: {

@@ -1466,6 +1466,42 @@ export interface Header {
               )
             | null;
         };
+        children?:
+          | {
+              link: {
+                type?: ('reference' | 'custom') | null;
+                newTab?: boolean | null;
+                reference?:
+                  | ({
+                      relationTo: 'pages';
+                      value: number | Page;
+                    } | null)
+                  | ({
+                      relationTo: 'posts';
+                      value: number | Post;
+                    } | null);
+                url?: string | null;
+                label: string;
+                /**
+                 * Choose how the link should be rendered.
+                 */
+                appearance?:
+                  | (
+                      | 'default'
+                      | 'outline'
+                      | 'secondary'
+                      | 'ghost'
+                      | 'link'
+                      | 'destructive'
+                      | 'primary'
+                      | 'danger'
+                      | 'secondaryCustom'
+                    )
+                  | null;
+              };
+              id?: string | null;
+            }[]
+          | null;
         id?: string | null;
       }[]
     | null;
@@ -1557,6 +1593,21 @@ export interface HeaderSelect<T extends boolean = true> {
               url?: T;
               label?: T;
               appearance?: T;
+            };
+        children?:
+          | T
+          | {
+              link?:
+                | T
+                | {
+                    type?: T;
+                    newTab?: T;
+                    reference?: T;
+                    url?: T;
+                    label?: T;
+                    appearance?: T;
+                  };
+              id?: T;
             };
         id?: T;
       };
