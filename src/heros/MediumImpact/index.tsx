@@ -1,5 +1,6 @@
 'use client'
 import { useHeaderTheme } from '@/providers/HeaderTheme'
+import { useTheme } from '@/providers/Theme'
 import React, { useEffect } from 'react'
 
 import type { Page } from '@/payload-types'
@@ -28,6 +29,7 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({
   buttons = {},
 }) => {
   const { setHeaderTheme } = useHeaderTheme()
+  const { theme } = useTheme()
   const { contact, schedule } = buttons as ButtonOptions
 
   useEffect(() => {
@@ -35,8 +37,13 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({
   })
 
   return (
-    <div className="relative -mt-[10.4rem] flex min-h-[66vh] text-white" data-theme="dark">
-      <div className="container relative z-10 self-center mt-32">
+    <div data-theme={theme}>
+      <div className="w-full h-[400px] relative">
+        {media && typeof media === 'object' && (
+          <Media fill imgClassName="object-cover w-full h-full" priority resource={media} />
+        )}
+      </div>
+      <div className="container mt-12 bg-background text-foreground">
         <div className="max-w-[36.5rem]">
           {richText && <RichText className="mb-6" data={richText} enableGutter={false} />}
           <div className="flex flex-wrap gap-4">
@@ -65,11 +72,6 @@ export const MediumImpactHero: React.FC<Page['hero']> = ({
             )}
           </div>
         </div>
-      </div>
-      <div className="absolute inset-0">
-        {media && typeof media === 'object' && (
-          <Media fill imgClassName="-z-10 object-cover" priority resource={media} />
-        )}
       </div>
     </div>
   )
