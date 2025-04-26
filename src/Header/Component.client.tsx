@@ -64,7 +64,7 @@ export const HeaderClient: React.FC<HeaderClientProps> = ({ data }) => {
           >
             <X className="w-7 h-7" />
           </button>
-          <HeaderNav data={data} mobile />
+          <HeaderNav data={data} mobile onNavigate={closeMenu} />
           <div className="mt-8 flex flex-col items-center gap-6">
             <ThemeSelector />
           </div>

@@ -28,6 +28,7 @@ type CMSLinkType = {
   size?: ButtonProps['size'] | null
   type?: 'custom' | 'reference' | null
   url?: string | null
+  onClick?: (e: React.MouseEvent<HTMLAnchorElement | HTMLButtonElement>) => void
 }
 
 export const CMSLink: React.FC<CMSLinkType> = (props) => {
@@ -41,6 +42,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
     reference,
     size: sizeFromProps,
     url,
+    onClick,
   } = props
 
   const href =
@@ -69,6 +71,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
         // fallback: open the external link
         window.open('https://evolve-wellness.clientsecure.me', '_blank')
       }
+      if (onClick) onClick(e)
     }
     if (effectiveAppearance === 'inline') {
       return (
@@ -91,7 +94,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
 
   if (effectiveAppearance === 'inline') {
     return (
-      <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
+      <Link className={cn(className)} href={href || url || ''} {...newTabProps} onClick={onClick}>
         {label && label}
         {children && children}
       </Link>
@@ -100,7 +103,7 @@ export const CMSLink: React.FC<CMSLinkType> = (props) => {
 
   return (
     <Button asChild className={className} size={size} variant={effectiveAppearance}>
-      <Link className={cn(className)} href={href || url || ''} {...newTabProps}>
+      <Link className={cn(className)} href={href || url || ''} {...newTabProps} onClick={onClick}>
         {label && label}
         {children && children}
       </Link>

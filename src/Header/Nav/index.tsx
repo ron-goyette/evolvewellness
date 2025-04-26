@@ -14,7 +14,8 @@ const NavItem: React.FC<{
   id?: string | null
   children?: NavItemType['children']
   mobile: boolean
-}> = ({ link, id, children, mobile }) => {
+  onNavigate?: () => void
+}> = ({ link, id, children, mobile, onNavigate }) => {
   const hasChildren = Array.isArray(children) && children.length > 0
   const [open, setOpen] = useState(mobile)
   let closeTimer: NodeJS.Timeout | null = null
@@ -54,6 +55,7 @@ const NavItem: React.FC<{
           {...link}
           appearance={link.appearance || 'link'}
           className={mobile ? 'text-2xl text-forground' : 'text-forground font-semibold'}
+          {...(mobile && onNavigate ? { onClick: onNavigate } : {})}
         />
       )}
       {hasChildren && (
@@ -77,6 +79,7 @@ const NavItem: React.FC<{
                     ? 'text-2xl text-forground'
                     : 'block px-4 py-2 text-forground hover:bg-accent hover:text-accent-foreground rounded font-semibold'
                 }
+                {...(mobile && onNavigate ? { onClick: onNavigate } : {})}
               />
             </li>
           ))}
@@ -86,17 +89,18 @@ const NavItem: React.FC<{
   )
 }
 
-export const HeaderNav: React.FC<{ data: HeaderType; mobile?: boolean }> = ({
-  data,
-  mobile = false,
-}) => {
+export const HeaderNav: React.FC<{
+  data: HeaderType
+  mobile?: boolean
+  onNavigate?: () => void
+}> = ({ data, mobile = false, onNavigate }) => {
   const navItems = data?.navItems || []
 
   return (
     <nav className={mobile ? 'flex flex-col items-center gap-8 mt-8' : 'flex gap-6 items-center'}>
       <ul className={mobile ? 'flex flex-col items-center gap-4' : 'flex gap-6 items-center'}>
         {navItems.map((item, i) => (
-          <NavItem key={item.id || i} {...item} mobile={mobile} />
+          <NavItem key={item.id || i} {...item} mobile={mobile} onNavigate={onNavigate} />
         ))}
       </ul>
       {!mobile && (
