@@ -14,7 +14,7 @@ export const CallToAction: React.FC<CallToActionProps> = ({ links, richText, but
       <div className="flex flex-col items-center py-16 gap-6 text-center">
         {richText && (
           <RichText
-            className="prose prose-headings:text-foreground prose-p:text-foreground prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-p:text-lg m-0 max-w-2xl"
+            className="prose prose-headings:text-foreground prose-p:text-foreground prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-p:text-lg prose-ul:text-foreground prose-li:text-foreground prose-li:marker:text-foreground m-0 max-w-2xl"
             data={richText}
             enableGutter={false}
           />

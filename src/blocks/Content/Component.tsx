@@ -33,7 +33,7 @@ export const ContentBlock: React.FC<ContentBlockProps> = (props) => {
               >
                 {richText && (
                   <RichText
-                    className="prose prose-headings:text-foreground prose-p:text-foreground prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-p:text-lg"
+                    className="prose prose-headings:text-foreground prose-p:text-foreground prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-p:text-lg prose-ul:text-foreground prose-li:text-foreground prose-li:marker:text-foreground"
                     data={richText}
                     enableGutter={false}
                   />
