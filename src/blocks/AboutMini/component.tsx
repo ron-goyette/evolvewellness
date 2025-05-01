@@ -35,7 +35,7 @@ export const AboutMini: React.FC<AboutMiniProps> = (props) => {
         <RichText
           data={richText}
           enableGutter={false}
-          className="text-base text-muted-foreground leading-relaxed"
+          className="prose prose-headings:text-foreground prose-p:text-foreground prose-h1:text-4xl prose-h2:text-3xl prose-h3:text-2xl prose-p:text-lg prose-ul:text-foreground prose-li:text-foreground prose-li:marker:text-foreground text-base text-muted-foreground leading-relaxed"
         />
       )}
       {link && <CMSLink {...link} appearance={link.appearance || 'primary'} />}
